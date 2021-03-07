@@ -21,13 +21,26 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -39,7 +52,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.androiddevchallenge.ui.theme.MyTheme
-
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,7 +95,8 @@ fun MyApp() {
     ) {
         Box {
             CircularProgressIndicator(
-                progress = progress, modifier = Modifier
+                progress = progress,
+                modifier = Modifier
                     .size(264.dp)
                     .offset(y = (-16).dp),
                 color = Color.Yellow
@@ -99,12 +112,14 @@ fun MyApp() {
                         shape = CircleShape,
                         color = Color.Gray
                     ) {
-                        IconButton(onClick = {
-                            if (!running) {
-                                countDownTimer.start()
-                                running = true
+                        IconButton(
+                            onClick = {
+                                if (!running) {
+                                    countDownTimer.start()
+                                    running = true
+                                }
                             }
-                        }) {
+                        ) {
                             Image(
                                 painterResource(R.drawable.ic_play),
                                 contentDescription = null,
@@ -118,12 +133,14 @@ fun MyApp() {
                         shape = CircleShape,
                         color = Color.Gray
                     ) {
-                        IconButton(onClick = {
-                            countDownTimer.cancel()
-                            value = 10
-                            progress = 1f
-                            running = false
-                        }) {
+                        IconButton(
+                            onClick = {
+                                countDownTimer.cancel()
+                                value = 10
+                                progress = 1f
+                                running = false
+                            }
+                        ) {
                             Image(
                                 painterResource(R.drawable.ic_stop),
                                 contentDescription = null,
